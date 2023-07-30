@@ -217,14 +217,7 @@ export default function SearchModal({
                 className="flex items-center space-x-4 border-b border-gray-400/30 bg-gray-50 p-4 dark:bg-gray-800 dark:text-white"
               >
                 <FontAwesomeIcon icon="search" className="h-4 w-4" />
-                <input
-                  type="text"
-                  id="search-box"
-                  className="w-full bg-transparent focus:outline-none focus-visible:outline-none"
-                  placeholder={t('Search ...')}
-                  value={query}
-                  onChange={e => setQuery(e.target.value)}
-                />
+
                 <div className="rounded-lg bg-gray-200 px-2 py-1 text-xs font-medium dark:bg-gray-700">ESC</div>
               </Dialog.Title>
               <div
