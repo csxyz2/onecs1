@@ -348,7 +348,7 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
         {!onlyOnePage && (
           <div className="rounded-b bg-white dark:bg-gray-900 dark:text-gray-100">
             <div className="border-b border-gray-200 p-3 text-center font-mono text-sm text-gray-400 dark:border-gray-700">
-              {t('- showing {{count}} page(s) ', {
+              {t('- All File Password Protected - Sign in Please ', {
                 count: size,
                 totalFileNum: isLoadingMore ? '...' : folderChildren.length,
               }) +
@@ -356,27 +356,7 @@ const FileListing: FC<{ query?: ParsedUrlQuery }> = ({ query }) => {
                   ? t('of {{count}} file(s) -', { count: folderChildren.length, context: 'loading' })
                   : t('of {{count}} file(s) -', { count: folderChildren.length, context: 'loaded' }))}
             </div>
-            <button
-              className={`flex w-full items-center justify-center space-x-2 p-3 disabled:cursor-not-allowed ${
-                isLoadingMore || isReachingEnd ? 'opacity-60' : 'hover:bg-gray-100 dark:hover:bg-gray-850'
-              }`}
-              onClick={() => setSize(size + 1)}
-              disabled={isLoadingMore || isReachingEnd}
-            >
-              {isLoadingMore ? (
-                <>
-                  <LoadingIcon className="inline-block h-4 w-4 animate-spin" />
-                  <span>{t('Loading ...')}</span>{' '}
-                </>
-              ) : isReachingEnd ? (
-                <span>{t('No more files')}</span>
-              ) : (
-                <>
-                  <span>{t('Load more')}</span>
-                  <FontAwesomeIcon icon="chevron-circle-down" />
-                </>
-              )}
-            </button>
+
           </div>
         )}
 
