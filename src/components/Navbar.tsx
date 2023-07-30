@@ -79,9 +79,9 @@ const Navbar = () => {
 
             <div className="hidden items-center space-x-1 md:flex">
               <div className="rounded-lg bg-gray-200 px-2 py-1 text-xs font-medium dark:bg-gray-700">
-                {os === 'mac' ? '⌘' : 'Ctrl'}
+                {os === 'mac' ? 'Sign' : 'Sign'}
               </div>
-              <div className="rounded-lg bg-gray-200 px-2 py-1 text-xs font-medium dark:bg-gray-700">K</div>
+              <div className="rounded-lg bg-gray-200 px-2 py-1 text-xs font-medium dark:bg-gray-700">In</div>
             </div>
           </button>
 
