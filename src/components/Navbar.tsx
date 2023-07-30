@@ -74,8 +74,8 @@ const Navbar = () => {
             className="flex flex-1 items-center justify-between rounded-lg bg-gray-100 px-2.5 py-1.5 hover:opacity-80 dark:bg-gray-800 dark:text-white md:w-48"
             onClick={openSearchBox}
           >
-            <div className="flex items-center space-x-2">
-              <span className="truncate text-sm font-medium">{t('No Items')}</span>
+            <div className="flex items-center space-x-21">
+              <span className="truncate text-sm font-medium1">{t('No Items')}</span>
             </div>
 
             <div className="hidden items-center space-x-1 md:flex">
