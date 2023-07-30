@@ -1,56 +1,67 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconName } from '@fortawesome/fontawesome-svg-core';
-import { Dialog, Transition } from '@headlessui/react';
-import toast, { Toaster } from 'react-hot-toast';
-import { useHotkeys } from 'react-hotkeys-hook';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { IconName } from '@fortawesome/fontawesome-svg-core'
+import { Dialog, Transition } from '@headlessui/react'
+import toast, { Toaster } from 'react-hot-toast'
+import { useHotkeys } from 'react-hotkeys-hook'
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
-import { useTranslation } from 'next-i18next';
+import Link from 'next/link'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { Fragment, useEffect, useState } from 'react'
+import { useTranslation } from 'next-i18next'
 
-import siteConfig from '../../config/site.config';
-import SwitchLang from './SwitchLang';
-import useDeviceOS from '../utils/useDeviceOS';
+import siteConfig from '../../config/site.config'
+import SearchModal from './SearchModal'
+import SwitchLang from './SwitchLang'
+import useDeviceOS from '../utils/useDeviceOS'
 
 const Navbar = () => {
-  const router = useRouter();
-  const os = useDeviceOS();
+  const router = useRouter()
+  const os = useDeviceOS()
 
-  const [tokenPresent, setTokenPresent] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [tokenPresent, setTokenPresent] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+
+  const [searchOpen, setSearchOpen] = useState(false)
+  const openSearchBox = () => setSearchOpen(true)
+
+  useHotkeys(`${os === 'mac' ? 'meta' : 'ctrl'}+k`, e => {
+    openSearchBox()
+    e.preventDefault()
+  })
 
   useEffect(() => {
     const storedToken = () => {
       for (const r of siteConfig.protectedRoutes) {
         if (localStorage.hasOwnProperty(r)) {
-          return true;
+          return true
         }
       }
-      return false;
-    };
-    setTokenPresent(storedToken());
-  }, []);
+      return false
+    }
+    setTokenPresent(storedToken())
+  }, [])
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const clearTokens = () => {
-    setIsOpen(false);
+    setIsOpen(false)
 
     siteConfig.protectedRoutes.forEach(r => {
-      localStorage.removeItem(r);
-    });
+      localStorage.removeItem(r)
+    })
 
-    toast.success(t('Cleared all tokens'));
+    toast.success(t('Cleared all tokens'))
     setTimeout(() => {
-      router.reload();
-    }, 1000);
-  };
+      router.reload()
+    }, 1000)
+  }
 
   return (
     <div className="sticky top-0 z-[100] border-b border-gray-900/10 bg-white bg-opacity-80 backdrop-blur-md dark:border-gray-500/30 dark:bg-gray-900">
       <Toaster />
+
+      <SearchModal searchOpen={searchOpen} setSearchOpen={setSearchOpen} />
 
       <div className="mx-auto flex w-full items-center justify-between space-x-4 px-4 py-1">
         <Link href="/" passHref className="flex items-center space-x-2 py-2 hover:opacity-80 dark:text-white md:p-2">
@@ -59,6 +70,8 @@ const Navbar = () => {
         </Link>
 
         <div className="flex flex-1 items-center space-x-4 text-gray-700 md:flex-initial">
+
+
           <SwitchLang />
 
           {siteConfig.links.length !== 0 &&
@@ -169,7 +182,7 @@ const Navbar = () => {
         </Dialog>
       </Transition>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
